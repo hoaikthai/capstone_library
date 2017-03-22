@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.role = "user"
     if @user.save
+    	login @user
     	flash[:success] = "Welcome to Capstone Library!"
       redirect_to @user
     else
