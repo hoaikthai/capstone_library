@@ -4,10 +4,12 @@
     <section class="user_info">
       <h1>
         <%= @user.name %><br>
+      </h1>
+      <h2>
         <%= @user.email %><br>
         <%= @user.birthday unless @user.birthday.nil? %><br>
         <%= @user.address unless @user.address.nil? %><br>
-      </h1>
+      </h2>
     </section>
   </div>
   <% if @user.librarian? %>
