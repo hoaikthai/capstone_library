@@ -1,0 +1,33 @@
+<% provide(:title, @book.name) %>
+<div class="book-details">
+  <div class="row">
+    <div class="col-md-4 col-sm-4">
+      <section class="book-cover">
+        <div class="rectangle"></div>
+      </section>
+      <% if @user.librarian? %>
+        <section class="librarian-control">
+          <%= link_to "Edit this book", edit_book_path %>
+        </section>
+      <% end %>
+    </div>
+    <div class="col-md-8 col-sm-8">
+      <section class="book-info">
+        <h3 class="book-detail-title"><%= @book.name %></h3>
+        by <h4><%= @book.author %></h4>
+      </section>
+      <section class="col-md-6 col-sm-6">
+        Genre : <%= @book.genre %><br>
+        Publisher : <%= @book.publisher %><br>
+        Publication Date : <%= @book.publication_date.strftime("%b %e %Y") %>
+      </section>
+      <section class="col-md-6 col-sm-6">
+        Number of pages : <%= @book.pages %><br>
+        Available : <%= @book.availability %>
+      </section>
+      <section class="book-introduction">
+        <p><%= @book.description.to_s %></p>
+      </section>
+    </div>
+</div>
+</div>

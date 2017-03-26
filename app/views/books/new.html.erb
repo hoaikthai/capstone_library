@@ -1,0 +1,36 @@
+<% provide(:title, 'Add new book') %>
+<h1>Add new book</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@book) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :author %>
+      <%= f.email_field :author, class: 'form-control' %>
+
+      <%= f.label :genre %>
+      <%= f.text_field :genre, class: 'form-control' %>
+
+      <%= f.label :publisher %>
+      <%= f.text_field :publisher, class: 'form-control' %>
+
+      <%= f.label :publication_date %>
+      <%= f.date_field :publication_date, class: 'form-control' %>
+
+      <%= f.label :pages %>
+      <%= f.text_field :pages, class: 'form-control' %>
+
+      <%= f.label :availability %>
+      <%= f.text_field :availability, class: 'form-control' %>
+
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+
+      <%= f.submit "Add new book", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

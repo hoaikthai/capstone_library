@@ -1,0 +1,17 @@
+<% provide(:title, 'All books') %>
+<h1>All books</h1>
+
+<%= will_paginate %>
+<table class="books-table">
+	<tr>
+		<th class="col-name">Title</th>
+		<th class="col-name">Author</th>
+		<th class="col-name">Genres</th>
+		<th class="col-name">Publisher</th>
+		<th class="col-name">Publication Date</th>
+		<th class="col-name">Num. of pages</th>
+		<th class="col-name">Availability</th>
+	</tr>
+	<%= render @books %>
+</table>
+<%= will_paginate %>

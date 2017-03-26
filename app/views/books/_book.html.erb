@@ -1,0 +1,9 @@
+<tr class="books-content">
+	<th class="book-content"><%= link_to book.name, book %></th>
+  <th class="book-content"><%= book.author %></th>
+  <th class="book-content"><%= book.genre %></th>
+  <th class="book-content"><%= book.publisher %></th>
+  <th class="book-content"><%= book.publication_date.strftime("%b %e %Y") %></th>
+  <th class="book-content"><%= book.pages %></th>
+  <th class="book-content"><%= book.availability %></th>
+</tr>

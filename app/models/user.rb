@@ -58,6 +58,10 @@ class User < ApplicationRecord
 		reset_sent_at < 2.hours.ago
 	end
 
+	def librarian?
+		self.role == "librarian"
+	end
+
 	private
 
 		def downcase_email
