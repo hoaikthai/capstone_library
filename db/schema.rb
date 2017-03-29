@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324094552) do
+ActiveRecord::Schema.define(version: 20170329103120) do
 
   create_table "books", force: :cascade do |t|
     t.string   "name"
@@ -20,9 +20,24 @@ ActiveRecord::Schema.define(version: 20170324094552) do
     t.string   "publisher"
     t.date     "publication_date"
     t.integer  "availability"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.text     "description"
+    t.integer  "number_of_borrowing_days"
+  end
+
+  create_table "borrowings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "book_id"
+    t.datetime "borrowed_time"
+    t.datetime "due_date"
+    t.boolean  "verified"
+    t.integer  "number_of_extension"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["book_id"], name: "index_borrowings_on_book_id"
+    t.index ["user_id", "book_id"], name: "index_borrowings_on_user_id_and_book_id", unique: true
+    t.index ["user_id"], name: "index_borrowings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -31,15 +46,16 @@ ActiveRecord::Schema.define(version: 20170324094552) do
     t.string   "email"
     t.date     "birthday"
     t.string   "address"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.string   "password_digest"
     t.string   "remember_digest"
     t.string   "activation_digest"
-    t.boolean  "activated",         default: false
+    t.boolean  "activated",                default: false
     t.datetime "activated_at"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
+    t.integer  "number_of_borrowed_books", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

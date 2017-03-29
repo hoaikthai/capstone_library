@@ -5,10 +5,20 @@
       <section class="book-cover">
         <div class="rectangle"></div>
       </section>
-      <% if @user.librarian? %>
-        <section class="librarian-control">
-          <%= link_to "Edit this book", edit_book_path %>
-        </section>
+      <% if current_user %>
+        <% if current_user.librarian? %>
+          <section class="librarian-control">
+            <%= link_to "Edit this book", edit_book_path %>
+          </section>
+        <% else %>
+          <div id="borrow_form">
+            <% unless Borrowing.find_by(user_id: current_user.id, book_id: @book.id) %>
+              <%= render 'borrow' %>
+            <% else %>
+              <%= render 'cancel' %>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
     </div>
     <div class="col-md-8 col-sm-8">
