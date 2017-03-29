@@ -7,4 +7,8 @@ class Book < ApplicationRecord
 	validates :publication_date, presence: true
 	validates :availability, presence: true
 
+	def self.search(search)
+		Book.where(search)
+	end
+
 end

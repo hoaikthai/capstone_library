@@ -3,6 +3,10 @@
     <%= link_to "capstone library", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/search"><span class="glyphicon glyphicon-search"></span></a>
+        </li>
+        <li><input id="search-bar" type="text" name="search" placeholder="Search.." onkeyup="quickSearch()"><br></li>
         <li><%= link_to "Home", root_path %></li>
         <li><%= link_to "Books", books_path %></li>
         <% if logged_in? %>
@@ -27,3 +31,24 @@
     </nav>
   </div>
 </header>
+
+<script>
+function quickSearch() {
+  var input, filter, table, tr, th, i;
+  input = document.getElementById("search-bar");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("books-table");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 1; i < tr.length; i++) {
+    th = tr[i].getElementsByTagName("th")[0];
+    if (th) {
+      if (th.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+</script>

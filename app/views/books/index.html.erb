@@ -1,9 +1,7 @@
-<% provide(:title, 'All books') %>
-<h1>All books</h1>
-
+<% provide(:title, 'Capstone Library') %>
 <%= will_paginate %>
-<table class="books-table">
-	<tr>
+<table class="books-table" id="books-table">
+	<tr id="table-header">
 		<th class="col-name">Title</th>
 		<th class="col-name">Author</th>
 		<th class="col-name">Genres</th>

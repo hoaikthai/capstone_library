@@ -1,0 +1,21 @@
+<% provide(:title, 'Advanced Search') %>
+<h1>Search book</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+		<%= form_for(:search, url: search_path) do |f| %>
+			<%= f.label :name %>
+			<%= f.text_field :name %>
+
+			<%= f.label :author %>
+			<%= f.text_field :author %>
+
+			<%= f.label :genre %>
+			<%= f.text_field :genre %>
+
+			<%= f.label :publisher %>
+			<%= f.text_field :publisher %>
+		
+			<%= f.submit "Search", class: "btn btn-primary" %>
+		<% end %>
+	</div>
+</div>
