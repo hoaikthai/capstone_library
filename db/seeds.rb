@@ -26,8 +26,9 @@ end
   genre = Faker::Book.genre
   pages = Faker::Number.between(100,2000)
   publication_date = Faker::Date.between(30.years.ago, Date.today)
-  availability = Faker::Number.between(0,20)
+  availability = Faker::Number.between(3,20)
   description = Faker::Lorem.paragraph(30)
+  number_of_borrowing_days = Faker::Number.between(14,28)
   Book.create!(name: name,
                author: author,
                genre: genre,
@@ -35,5 +36,6 @@ end
                publisher: publisher,
                publication_date: publication_date,
                availability: availability,
-               description: description)
+               description: description,
+               number_of_borrowing_days: number_of_borrowing_days)
 end

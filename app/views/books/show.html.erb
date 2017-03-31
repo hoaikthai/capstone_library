@@ -12,10 +12,18 @@
           </section>
         <% else %>
           <div id="borrow_form">
-            <% unless Borrowing.find_by(user_id: current_user.id, book_id: @book.id) %>
-              <%= render 'borrow' %>
+            <% if borrowing = Borrowing.find_by(user_id: current_user.id, book_id: @book.id) %>
+              <% if !borrowing.verified? %>
+                <%= render 'cancel' %>
+              <% else %>
+                <%= render 'extend' %>
+              <% end %>
             <% else %>
-              <%= render 'cancel' %>
+              <% if current_book.availability > 0 %>
+                <%= render 'borrow' %>
+              <% else %>
+                No book available
+              <% end %>
             <% end %>
           </div>
         <% end %>
