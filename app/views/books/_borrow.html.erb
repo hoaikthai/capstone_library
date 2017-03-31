@@ -1,4 +1,4 @@
-<%= form_for(current_user.borrowings.build, remote: true) do |f| %>
+<%= form_for(current_user.borrowings.build) do |f| %>
   <%= hidden_field_tag :user_id, current_user.id %>
   <%= hidden_field_tag :book_id, current_book.id %>
   <%= f.submit "Borrow", class: "btn btn-primary" %>

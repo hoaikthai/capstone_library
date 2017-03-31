@@ -161,3 +161,16 @@ input {
     border-bottom: 1px solid $gray-lighter;
   }
 }
+
+/* Extend form */
+
+input.extend-input {
+  display: inline;
+  width: 100px;
+  margin-right: 10px;
+}
+
+.extend-button {
+  display: inline;
+  width: 100px;
+}

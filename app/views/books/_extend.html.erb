@@ -3,6 +3,6 @@
   <%= hidden_field_tag :user_id, current_user.id %>
   <%= hidden_field_tag :book_id, current_book.id %>
   <%= f.label :borrow_more %> (days)
-  <%= f.text_field :due_date %>
+  <input type="text" name="extension_day">
   <%= f.submit "Extend", class: "btn" %>
 <% end %>
