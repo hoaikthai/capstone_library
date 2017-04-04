@@ -4,7 +4,7 @@ User.create!(name:  "Librarian 1",
              password_confirmation: "foobar",
              role: "librarian",
              activated: true,
-             activated_at: Time.zone.now)
+             activated_at: Time.now)
 
 99.times do |n|
   name  = Faker::Name.name
@@ -16,7 +16,7 @@ User.create!(name:  "Librarian 1",
               password_confirmation: password,
               role: "user",
               activated: true,
-              activated_at: Time.zone.now)
+              activated_at: Time.now)
 end
 
 99.times do |n|

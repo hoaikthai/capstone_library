@@ -4,16 +4,16 @@ one:
   name: MyString
   author: MyString
   genre: MyString
-  pages: 1
+  pages: 100
   publisher: MyString
   publication_date: 2017-03-24
-  availability: 1
+  availability: 100
 
 two:
   name: MyString
   author: MyString
   genre: MyString
-  pages: 1
+  pages: 100
   publisher: MyString
   publication_date: 2017-03-24
-  availability: 1
+  availability: 0

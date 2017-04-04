@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/search', to: 'searches#new'
   post '/search', to: 'searches#create'
+  patch '/approve/', to: 'borrowings#approve'
+  delete '/deny/', to: 'borrowings#deny'
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]

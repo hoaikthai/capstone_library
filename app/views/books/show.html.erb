@@ -47,5 +47,23 @@
         <p><%= @book.description.to_s %></p>
       </section>
     </div>
+  </div>
 </div>
-</div>
+<% if current_user && current_user.role == "librarian" %>
+  <div class="borrowing-status">
+    <% if @borrowings.empty? %>
+      No book borrowed
+    <% else %>
+      <table class="books-table" id="books-table">
+        <tr id="table-header">
+          <th class="col-name">User</th>
+          <th class="col-name">Due date</th>
+        </tr>
+        <% @borrowings.each do |i| %>
+          <th><%= User.find_by(id: i.user_id).name %></th>
+          <th><%= i.due_date %></th>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
+<% end %>

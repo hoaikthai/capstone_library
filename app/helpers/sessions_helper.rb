@@ -49,5 +49,14 @@ module SessionsHelper
 	def store_location
 		session[:forwarding_url] = request.original_url if request.get?
 	end
+
+	def owed_book?
+		user = current_user
+		borrowings = user.borrowings
+		borrowings.each do |i|
+			return true if i.due_date < Time.now
+		end
+		return false
+	end
 	
 end

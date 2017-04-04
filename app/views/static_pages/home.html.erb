@@ -26,12 +26,20 @@
 					<th><%= Book.find_by(id: i.book_id).author %></th>
 					<th><%= i.due_date %></th>
 					<th>
-						<%= form_for(current_user.borrowings.find_by(user_id: current_user.id, book_id: Book.find_by(id: i.book_id).id), html: { method: :patch }, class: 'form-inline', style: 'display:inline !important;') do |f| %>
-						  <%= hidden_field_tag :user_id, current_user.id %>
-						  <%= hidden_field_tag :book_id, Book.find_by(id: i.book_id).id %>
-						  <input type="text" name="extension_day" class="extend-input">
-						  <%= f.submit "Extend", class: "btn extend-button" %>
-						<% end %>
+						<% if !i.verified? %>
+              <%= form_for(i, html: { method: :delete }) do |f| %>
+							  <%= hidden_field_tag :user_id, current_user.id %>
+							  <%= hidden_field_tag :book_id, current_book.id %>
+							  <%= f.submit "Cancel", class: "btn cancel-button" %>
+							<% end %>
+            <% else %>
+              <%= form_for(current_user.borrowings.find_by(user_id: current_user.id, book_id: Book.find_by(id: i.book_id).id), html: { method: :patch }, class: 'form-inline', style: 'display:inline !important;') do |f| %>
+							  <%= hidden_field_tag :user_id, current_user.id %>
+							  <%= hidden_field_tag :book_id, Book.find_by(id: i.book_id).id %>
+							  <input type="text" name="extension_day" class="extend-input">
+							  <%= f.submit "Extend", class: "btn extend-button" %>
+							<% end %>
+            <% end %>
 					</th>
 				</tr>
 			<% end %>
@@ -55,8 +63,19 @@
 					<th><%= i.due_date %></th>
 					<th><%= i.request %></th>
 					<th>
-						<button>Verify</button>
-						<button>Deny</button>
+						<%= form_for(i, url: approve_path, html: { method: :patch }) do |f| %>
+							<%= hidden_field_tag :id, i.id %>
+						  <%= hidden_field_tag :user_id, i.user_id %>
+						  <%= hidden_field_tag :book_id, i.book_id %>
+						  <%= hidden_field_tag :request, i.request %>
+						  <%= f.submit "Approve", class: "btn approve-button" %>
+						<% end %>
+						<%= form_for(i, url: deny_path, html: { method: :delete }) do |f| %>
+							<%= hidden_field_tag :id, i.id %>
+						  <%= hidden_field_tag :user_id, i.user_id %>
+						  <%= hidden_field_tag :book_id, i.book_id %>
+						  <%= f.submit "Deny", class: "btn deny-button" %>
+						<% end %>
 					</th>
 				</tr>
 			<% end %>

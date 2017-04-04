@@ -7,6 +7,7 @@ class BooksController < ApplicationController
 
 	def show
 		@book = Book.find(params[:id])
+    @borrowings = @book.borrowings
     session[:book_id] = @book.id
 	end
 
