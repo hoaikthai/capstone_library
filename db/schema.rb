@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 20170331092538) do
     t.integer  "book_id"
     t.datetime "borrowed_time"
     t.datetime "due_date"
-    t.boolean  "verified"
-    t.integer  "number_of_extension"
+    t.boolean  "verified",            default: false
+    t.integer  "number_of_extension", default: 0
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.string   "request",             default: "borrow"

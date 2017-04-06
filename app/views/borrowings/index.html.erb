@@ -1,0 +1,16 @@
+<% provide(:title, 'Current Borrowing') %>
+<%= form_tag(controller: "borrowings", action: "find", method: "post") do %>
+	<%= text_field_tag :find_borrowing, nil, placeholder: "Input book id" %>
+	<% submit_tag "Find" %>
+<% end %>
+<table class="borrowings-table">
+	<tr id="table-header">
+		<th class="col-name">Title</th>
+		<th class="col-name">Author</th>
+		<th class="col-name">Borrowing User</th>
+		<th class="col-name">Borrowed Time</th>
+		<th class="col-name">Due Date</th>
+		<th class="col-name">Action</th>
+	</tr>
+	<%= render @borrowings %>
+</table>

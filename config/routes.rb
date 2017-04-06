@@ -13,12 +13,14 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/search', to: 'searches#new'
   post '/search', to: 'searches#create'
-  patch '/approve/', to: 'borrowings#approve'
-  delete '/deny/', to: 'borrowings#deny'
+  patch '/approve', to: 'borrowings#approve'
+  delete '/deny', to: 'borrowings#deny'
+  delete '/return', to: 'borrowings#return'
+  post '/find', to: 'borrowings#find'
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :books
-  resources :borrowings, only: [:create, :edit, :update, :destroy]
+  resources :borrowings, only: [:create, :edit, :update, :destroy, :index]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

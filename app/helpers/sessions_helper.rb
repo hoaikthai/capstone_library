@@ -51,12 +51,15 @@ module SessionsHelper
 	end
 
 	def owed_book?
-		user = current_user
-		borrowings = user.borrowings
-		borrowings.each do |i|
-			return true if i.due_date < Time.now
+		if user = current_user
+			borrowings = user.borrowings.map{ |b| b if !b.verified? }.compact
+			borrowings.each do |i|
+				return true if i.due_date < Time.now
+			end
+			return false
+		else
+			return false
 		end
-		return false
 	end
 	
 end

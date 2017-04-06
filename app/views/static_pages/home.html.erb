@@ -18,7 +18,7 @@
 				<th class="col-name">Title</th>
 				<th class="col-name">Author</th>
 				<th class="col-name">Due date</th>
-				<th class="col-name">Action</th>
+				<th class="col-name" colspan="2">Action</th>
 			</tr>
 			<% @borrowings.each do |i| %>
 				<tr>
@@ -57,23 +57,21 @@
 			</tr>
 			<% @borrowings.each do |i| %>
 				<tr>
-					<th><%= Book.find_by(id: i.book_id).name %></th>
-					<th><%= Book.find_by(id: i.book_id).author %></th>
+					<% book = Book.find_by(id: i.book_id) %>
+					<th><%= link_to book.name, book %></th>
+					<th><%= book.author %></th>
 					<th><%= User.find_by(id: i.user_id).name %></th>
 					<th><%= i.due_date %></th>
 					<th><%= i.request %></th>
 					<th>
 						<%= form_for(i, url: approve_path, html: { method: :patch }) do |f| %>
 							<%= hidden_field_tag :id, i.id %>
-						  <%= hidden_field_tag :user_id, i.user_id %>
-						  <%= hidden_field_tag :book_id, i.book_id %>
-						  <%= hidden_field_tag :request, i.request %>
 						  <%= f.submit "Approve", class: "btn approve-button" %>
 						<% end %>
+					</th>
+					<th>
 						<%= form_for(i, url: deny_path, html: { method: :delete }) do |f| %>
 							<%= hidden_field_tag :id, i.id %>
-						  <%= hidden_field_tag :user_id, i.user_id %>
-						  <%= hidden_field_tag :book_id, i.book_id %>
 						  <%= f.submit "Deny", class: "btn deny-button" %>
 						<% end %>
 					</th>

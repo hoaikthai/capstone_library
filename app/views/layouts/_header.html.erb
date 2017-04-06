@@ -17,7 +17,10 @@
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to "Profile", current_user %></li>
-              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+              <li><%= link_to "Edit info", edit_user_path(current_user) %></li>
+              <% if current_user.role == "librarian" %>
+                <li><%= link_to "Current borrowings", borrowings_path %></li>
+              <% end %>
               <li class="divider"></li>
               <li>
                 <%= link_to "Log out", logout_path, method: "delete" %>

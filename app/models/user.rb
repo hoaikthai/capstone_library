@@ -10,6 +10,8 @@ class User < ApplicationRecord
 	validates :role, presence: true, format: { with: /(librarian|user)/i }
 	has_secure_password
 	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+	validates :number_of_borrowed_books, numericality: { less_than: 6,
+		greater_than_or_equal_to: 0 }
 
 	def User.digest string
 		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

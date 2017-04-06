@@ -1,5 +1,5 @@
 <%= form_for(current_user.borrowings.find_by(user_id: current_user.id, book_id: @book.id), html: { method: :delete }) do |f| %>
   <%= hidden_field_tag :user_id, current_user.id %>
   <%= hidden_field_tag :book_id, current_book.id %>
-  <%= f.submit "Cancel", class: "btn" %>
+  <%= f.submit "Cancel", class: "btn cancel-button" %>
 <% end %>

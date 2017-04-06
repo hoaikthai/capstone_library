@@ -13,6 +13,7 @@ archer:
   role: user
   activated: true
   activated_at: <%= Time.zone.now %>
+  number_of_borrowed_books: 1
 
 lana:
   name: Lana Kane

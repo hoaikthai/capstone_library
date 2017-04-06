@@ -1,17 +1,8 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
+borrow_one:
   user: archer
-  book: one
-  borrowed_time: 2017-03-29 16:45:42
-  due_date: 2017-03-29 16:45:42
+  book: book_one
   verified: true
-  number_of_extension: 1
-
-two:
-  user: archer
-  book: two
-  borrowed_time: 2017-03-29 16:45:42
-  due_date: 2017-03-29 16:45:42
-  verified: false
-  number_of_extension: 1
+  borrowed_time: <%= Time.zone.now %>
+  due_date: <%= Time.zone.now + 14.days %>
+  number_of_extension: 0
+  request: null

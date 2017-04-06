@@ -14,7 +14,9 @@
   </div>
   <% if @user.librarian? %>
     <div class="librarian-control">
-      <%= link_to "Add new book", new_book_path %>
+      <%= link_to "Add new book", new_book_path %><br>
+      <%= link_to "Show all borrowings", borrowings_path %><br>
+      <%= link_to "Show all requests", root_path %><br>
     </div>
   <% end %>
 </div>

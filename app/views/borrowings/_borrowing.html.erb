@@ -1,0 +1,15 @@
+<tr class="borrowings-content">
+	<% book = Book.find_by(id: borrowing.book_id) %>
+	<% user = User.find_by(id: borrowing.user_id) %>
+	<th><%= link_to book.name, book %></th>
+  <th><%= book.author %></th>
+  <th><%= user.name %></th>
+  <th><%= borrowing.borrowed_time %></th>
+  <th><%= borrowing.due_date %></th>
+  <th>
+  	<%= form_for(borrowing, url: return_path, html: { method: :delete }) do |f| %>
+  		<%= hidden_field_tag :id, borrowing.id %>
+  		<%= f.submit "Return book", class: "btn return-button" %>
+  	<% end %>
+  </th>
+</tr>
