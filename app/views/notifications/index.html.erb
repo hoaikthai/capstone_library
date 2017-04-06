@@ -1,0 +1,24 @@
+<% provide(:title, 'Notifications') %>
+<table class="notifications-table">
+	<tr id="table-header">
+		<th class="col-name">Content</th>
+		<th class="col-name">Time</th>
+	</tr>
+	<% unless @unread.compact.empty? %>
+		<% @unread.each do |n| %>
+			<tr class="unread-notification">
+				<th><%= n.content %></th>
+				<th><%= n.created_at %></th>
+			</tr>
+		<% end %>
+		<hr>
+	<% end %>
+	<% unless @read.compact.empty? %>
+		<% @read.each do |n| %>
+			<tr>
+				<th><%= n.content %></th>
+				<th><%= n.created_at %></th>
+			</tr>
+		<% end %>
+	<% end %>
+</table>

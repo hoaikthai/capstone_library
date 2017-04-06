@@ -8,7 +8,6 @@ class SessionsController < ApplicationController
       if user.activated?
         login user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        flash[:danger] = "You have books not returned" if owed_book?
         redirect_back_or user
       else
         message = "Account not activated, please check your email for account activation."

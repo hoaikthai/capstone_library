@@ -40,30 +40,40 @@ class BorrowingsController < ApplicationController
 	def approve
 		borrowing = Borrowing.find_by(id: params[:id])
 		@book = Book.find_by(id: borrowing.book_id)
+		@user = User.find_by(id: borrowing.user_id)
 		if !borrowing.verified?
-			@user = User.find_by(id: borrowing.user_id)
 			@user.increment!(:number_of_borrowed_books)
 			@book.decrement!(:availability)
 			borrowing.update_attributes(borrowed_time: Time.now,
 																	due_date: Time.now + @book.number_of_borrowing_days,
 																	verified: true,
 																	request: nil)
+			content = "Your borrowing " + @book.name + " request has been approved,
+													please come to Capstone Library to get your books."
+			Notification.create(user_id: @user.id, content: content)
 		else
 			borrowing.update_attributes(number_of_extension: borrowing.number_of_extension + 1,
 																	due_date: borrowing.due_date + borrowing.request.to_i.days,
 																	request: nil)
+			content = "Your extending " + @book.name + " request has been approved."
+			Notification.create(user_id: @user.id, content: content)
 		end
 		redirect_to '/'
 	end
 
 	def deny
 		borrowing = Borrowing.find(params[:id])
+		@book = Book.find_by(id: borrowing.book_id)
+		@user = User.find_by(id: borrowing.user_id)
 		if !borrowing.verified?
+			content = "Your borrowing " + @book.name + " request has been denied."
+			Notification.create(user_id: @user.id, content: content)
 			borrowing.delete
 		else
+			content = "Your borrowing " + @book.name + " request has been denied."
+			Notification.create(user_id: @user.id, content: content)
 			borrowing.update_attributes(request: nil)
 		end
-		#send msg to user
 		redirect_to '/'
 	end
 
@@ -109,4 +119,17 @@ class BorrowingsController < ApplicationController
     		redirect_to root_url
     	end
     end
+
+    def owed_book?
+			if user = current_user
+				borrowings = user.borrowings.map{ |b| b if !b.verified? }.compact
+				borrowings.each do |i|
+					return true if i.due_date < Time.now
+				end
+				return false
+			else
+				return false
+			end
+		end
+	
 end

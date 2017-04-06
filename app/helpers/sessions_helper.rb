@@ -49,17 +49,5 @@ module SessionsHelper
 	def store_location
 		session[:forwarding_url] = request.original_url if request.get?
 	end
-
-	def owed_book?
-		if user = current_user
-			borrowings = user.borrowings.map{ |b| b if !b.verified? }.compact
-			borrowings.each do |i|
-				return true if i.due_date < Time.now
-			end
-			return false
-		else
-			return false
-		end
-	end
 	
 end
