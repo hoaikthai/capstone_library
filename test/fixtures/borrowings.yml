@@ -6,3 +6,21 @@ borrow_one:
   due_date: <%= Time.zone.now + 14.days %>
   number_of_extension: 0
   request: null
+
+borrow_two:
+  user: lana
+  book: book_one
+  verified: true
+  borrowed_time: <%= Time.zone.now - 28.days %>
+  due_date: <%= Time.zone.now - 14.days %>
+  number_of_extension: 0
+  request: null
+
+borrow_three:
+  user: malory
+  book: book_one
+  verified: true
+  borrowed_time: <%= Time.zone.now %>
+  due_date: <%= Time.zone.now + 14.days %>
+  number_of_extension: 3
+  request: null

@@ -22,6 +22,7 @@ lana:
   role: user
   activated: true
   activated_at: <%= Time.zone.now %>
+  number_of_borrowed_books: 1
 
 malory:
   name: Malory Archer
@@ -30,6 +31,7 @@ malory:
   role: user
   activated: true
   activated_at: <%= Time.zone.now %>
+  number_of_borrowed_books: 1
 
 <% 30.times do |n| %>
 user_<%= n %>:

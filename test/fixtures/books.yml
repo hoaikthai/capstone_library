@@ -19,3 +19,23 @@ book_two:
   publication_date: 2017-03-24
   availability: 10
   number_of_borrowing_days: 14
+
+book_three:
+  name: MyString
+  author: MyString
+  genre: MyString
+  pages: 100
+  publisher: MyString
+  publication_date: 2017-03-24
+  availability: 10
+  number_of_borrowing_days: 14
+
+book_four:
+  name: MyString
+  author: MyString
+  genre: MyString
+  pages: 100
+  publisher: MyString
+  publication_date: 2017-03-24
+  availability: 0
+  number_of_borrowing_days: 14 

@@ -5,9 +5,13 @@ class BorrowingsController < ApplicationController
 	def create
 		@book = Book.find(params[:book_id])
 		unless owed_book?
-			@borrowing = Borrowing.create(user_id: params[:user_id],
-																		book_id: params[:book_id])
-			flash[:success] = "Request borrowing sent"
+			if @book.availability == 0
+				flash[:danger] = "This book is not available"
+			else
+				@borrowing = Borrowing.create(user_id: params[:user_id],
+																			book_id: params[:book_id])
+				flash[:success] = "Request borrowing sent"
+			end
 		end
 		redirect_to @book
 	end

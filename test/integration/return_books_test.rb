@@ -19,6 +19,6 @@ class ReturnBooksTest < ActionDispatch::IntegrationTest
   	assert_redirected_to borrowings_path
   	follow_redirect!
   	assert_not flash.empty?
-  	assert_select "input.return-button", false
+  	assert_select "input.return-button"
   end
 end

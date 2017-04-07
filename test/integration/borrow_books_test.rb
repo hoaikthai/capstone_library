@@ -4,9 +4,13 @@ class BorrowBooksTest < ActionDispatch::IntegrationTest
   def setup
   	@lib_user = users(:michael)
   	@user = users(:archer)
+    @owed_user = users(:lana)
+    @extend_user = users(:malory)
   	@borrowed_book = books(:book_one)
   	@book = books(:book_two)
+    @not_available_book = books(:book_four)
   	@borrowing = borrowings(:borrow_one)
+    @max_extend_borrowing = borrowings(:borrow_three)
   end
 
   test "request borrowing" do
@@ -83,6 +87,38 @@ class BorrowBooksTest < ActionDispatch::IntegrationTest
   	patch approve_path, params: { id: @borrowing.id }
   	@borrowing.reload
   	assert_equal old_borrowing, @borrowing.due_date - 3.days
+  end
+
+  test "cannot borrow books when owed books" do
+    log_in_as @owed_user
+    get root_path
+    assert_not flash.empty?
+    assert_no_difference 'Borrowing.count' do
+      post borrowings_path, params: { user_id: @owed_user.id, book_id: @book.id }
+    end
+    follow_redirect!
+    assert_select 'input.borrow-button'
+    assert_not flash.empty?
+  end
+
+  test "cannot borrow not available books" do
+    log_in_as @user
+    get book_path @not_available_book
+    assert_no_difference 'Borrowing.count' do
+      post borrowings_path, params: { user_id: @user.id, book_id: @not_available_book.id }
+    end
+    follow_redirect!
+    assert_not flash.empty?
+  end
+
+  test "cannot extend more than 3 times" do
+    log_in_as @extend_user
+    get book_path @book
+    old_due_date = @max_extend_borrowing.due_date
+    patch borrowing_path(@max_extend_borrowing), params: { extension_day: 3 }
+    assert_not flash.empty?
+    @max_extend_borrowing.reload
+    assert_equal old_due_date, @max_extend_borrowing.due_date
   end
 
 end
