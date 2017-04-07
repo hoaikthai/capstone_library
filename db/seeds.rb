@@ -39,3 +39,11 @@ end
                description: description,
                number_of_borrowing_days: number_of_borrowing_days)
 end
+
+Borrowing.create!(user_id: 5, 
+                  book_id: 4, 
+                  borrowed_time: Time.now - 28.days,
+                  due_date: Time.now - 14.days,
+                  verified: true,
+                  number_of_extension: 2,
+                  request: nil)
