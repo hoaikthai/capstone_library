@@ -3,13 +3,11 @@ class BorrowingsController < ApplicationController
 	before_action :librarian_user, only: [:index]
 
 	def create
+		@book = Book.find(params[:book_id])
 		unless owed_book?
-			@book = Book.find(params[:book_id])
 			@borrowing = Borrowing.create(user_id: params[:user_id],
 																		book_id: params[:book_id])
 			flash[:success] = "Request borrowing sent"
-		else
-			flash[:danger] = "You have books not returned"
 		end
 		redirect_to @book
 	end
@@ -45,7 +43,7 @@ class BorrowingsController < ApplicationController
 			@user.increment!(:number_of_borrowed_books)
 			@book.decrement!(:availability)
 			borrowing.update_attributes(borrowed_time: Time.now,
-																	due_date: Time.now + @book.number_of_borrowing_days,
+																	due_date: Time.now + @book.number_of_borrowing_days.days,
 																	verified: true,
 																	request: nil)
 			content = "Your borrowing " + @book.name + " request has been approved,
@@ -122,14 +120,14 @@ class BorrowingsController < ApplicationController
 
     def owed_book?
 			if user = current_user
-				borrowings = user.borrowings.map{ |b| b if !b.verified? }.compact
+				borrowings = user.borrowings.map{ |b| b if b.verified? }.compact
 				borrowings.each do |i|
 					return true if i.due_date < Time.now
 				end
-				return false
 			else
 				return false
 			end
+			false
 		end
 	
 end

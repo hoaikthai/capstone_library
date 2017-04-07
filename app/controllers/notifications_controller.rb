@@ -4,11 +4,11 @@ class NotificationsController < ApplicationController
   def index
   	@notifications = current_user.notifications
   	if @notifications
-	  	@unread = @notifications.map { |n| n if !n.seen? }.reverse
-	  	unless @unread.compact.empty?
+      @read = @notifications.map { |n| n if n.seen? }.compact!.reverse
+	  	@unread = @notifications.map { |n| n if !n.seen? }.compact!.reverse
+	  	unless @unread.empty?
 	  		@unread.each { |n| n.update_attributes(seen: true) }
 	  	end
-	  	@read = @notifications.map { |n| n if n.seen? }.reverse
 	  end
   end
 
