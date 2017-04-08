@@ -7,6 +7,7 @@ class Book < ApplicationRecord
 	validates :publication_date, presence: true
 	validates :availability, presence: true
 	validates :number_of_borrowing_days, presence: true
+	validates :dewey_code, presence: true, numericality: { less_than: 1000 }
 	has_many :borrowings, dependent: :destroy
 
 	def self.search(search)

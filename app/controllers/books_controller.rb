@@ -17,6 +17,7 @@ class BooksController < ApplicationController
 
   def create
   	@book = Book.new(book_params)
+    @book.genre = Dewey.get_genre(@book.dewey_code)
   	if @book.save
   		flash[:info] = "Book added."
   		redirect_to @book
@@ -32,6 +33,8 @@ class BooksController < ApplicationController
   def update
   	@book = Book.find(params[:id])
   	if @book.update_attributes(book_params)
+      @book.genre = Dewey.get_genre(@book.dewey_code)
+      @book.save
   		flash[:success] = "Book updated"
   		redirect_to @book
   	else
@@ -50,7 +53,7 @@ class BooksController < ApplicationController
   	end
 
   	def book_params
-      params.require(:book).permit(:name, :author, :genre, 
+      params.require(:book).permit(:name, :author, :dewey_code, 
       	:publisher, :publication_date, :pages, :availability, :description)
     end
 

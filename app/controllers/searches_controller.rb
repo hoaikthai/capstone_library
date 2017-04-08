@@ -5,11 +5,11 @@ class SearchesController < ApplicationController
 
 	def create
 		args = Array.new
-		condition = "name like ? and author like ? and genre like ? and publisher like ?"
+		condition = "name like ? and author like ? and dewey_code like ? and publisher like ?"
 		args << condition
 		args << "%"+params[:search][:name]+"%"
 		args << "%"+params[:search][:author]+"%"
-		args << "%"+params[:search][:genre]+"%"
+		args << params[:search][:dewey_code]+"%"
 		args << "%"+params[:search][:publisher]+"%"
 		@books = Book.search(args)
 		@searches = @books.paginate(page: params[:page])

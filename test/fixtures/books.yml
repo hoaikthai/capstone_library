@@ -9,6 +9,7 @@ book_one:
   publication_date: 2017-03-24
   availability: 100
   number_of_borrowing_days: 14
+  dewey_code: 123
 
 book_two:
   name: MyString
@@ -19,6 +20,7 @@ book_two:
   publication_date: 2017-03-24
   availability: 10
   number_of_borrowing_days: 14
+  dewey_code: 123
 
 book_three:
   name: MyString
@@ -29,6 +31,7 @@ book_three:
   publication_date: 2017-03-24
   availability: 10
   number_of_borrowing_days: 14
+  dewey_code: 123
 
 book_four:
   name: MyString
@@ -38,4 +41,5 @@ book_four:
   publisher: MyString
   publication_date: 2017-03-24
   availability: 0
-  number_of_borrowing_days: 14 
+  number_of_borrowing_days: 14
+  dewey_code: 123
