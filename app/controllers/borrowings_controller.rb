@@ -4,13 +4,16 @@ class BorrowingsController < ApplicationController
 
 	def create
 		@book = Book.find(params[:book_id])
+		@user = current_user
 		unless owed_book?
 			if @book.availability == 0
 				flash[:danger] = "This book is not available"
-			else
+			elsif @user.number_of_borrowed_books < 5
 				@borrowing = Borrowing.create(user_id: params[:user_id],
 																			book_id: params[:book_id])
 				flash[:success] = "Request borrowing sent"
+			else
+				flash[:danger] = "You cannot borrow more than 5 books"
 			end
 		end
 		redirect_to @book
