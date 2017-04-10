@@ -24,3 +24,39 @@ borrow_three:
   due_date: <%= Time.zone.now + 14.days %>
   number_of_extension: 3
   request: null
+
+borrow_four:
+  user: malory
+  book: book_six
+  verified: true
+  borrowed_time: <%= Time.zone.now %>
+  due_date: <%= Time.zone.now + 14.days %>
+  number_of_extension: 0
+  request: null
+
+borrow_five:
+  user: malory
+  book: book_three
+  verified: true
+  borrowed_time: <%= Time.zone.now %>
+  due_date: <%= Time.zone.now + 14.days %>
+  number_of_extension: 1
+  request: null
+
+borrow_six:
+  user: malory
+  book: book_four
+  verified: true
+  borrowed_time: <%= Time.zone.now %>
+  due_date: <%= Time.zone.now + 14.days %>
+  number_of_extension: 2
+  request: null
+
+borrow_seven:
+  user: malory
+  book: book_five
+  verified: true
+  borrowed_time: <%= Time.zone.now %>
+  due_date: <%= Time.zone.now + 14.days %>
+  number_of_extension: 1
+  request: null

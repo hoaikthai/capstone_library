@@ -6,6 +6,7 @@ class BorrowBooksTest < ActionDispatch::IntegrationTest
   	@user = users(:archer)
     @owed_user = users(:lana)
     @extend_user = users(:malory)
+    @borrow_max_user = users(:malo)
   	@borrowed_book = books(:book_one)
   	@book = books(:book_two)
     @not_available_book = books(:book_four)
@@ -109,6 +110,16 @@ class BorrowBooksTest < ActionDispatch::IntegrationTest
     get book_path @not_available_book
     assert_no_difference 'Borrowing.count' do
       post borrowings_path, params: { user_id: @user.id, book_id: @not_available_book.id }
+    end
+    follow_redirect!
+    assert_not flash.empty?
+  end
+
+  test "cannot borrow more than 5 books" do
+    log_in_as @borrow_max_user
+    get book_path @book
+    assert_no_difference 'Borrowing.count' do
+      post borrowings_path, params: { user_id: @borrow_max_user, book_id: @book.id }
     end
     follow_redirect!
     assert_not flash.empty?

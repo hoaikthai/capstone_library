@@ -43,3 +43,25 @@ book_four:
   availability: 0
   number_of_borrowing_days: 14
   dewey_code: 123
+
+book_five:
+  name: MyString
+  author: MyString
+  genre: MyString
+  pages: 100
+  publisher: MyString
+  publication_date: 2017-03-24
+  availability: 0
+  number_of_borrowing_days: 14
+  dewey_code: 123
+
+book_six:
+  name: MyString
+  author: MyString
+  genre: MyString
+  pages: 100
+  publisher: MyString
+  publication_date: 2017-03-24
+  availability: 0
+  number_of_borrowing_days: 14
+  dewey_code: 123
