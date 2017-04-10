@@ -99,6 +99,9 @@ class BorrowBooksTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_select 'input.borrow-button'
     assert_not flash.empty?
+    delete logout_path
+    follow_redirect!
+    assert flash.empty?
   end
 
   test "cannot borrow not available books" do

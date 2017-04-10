@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
 
   def destroy
     logout if logged_in?
+    flash.discard
     redirect_to root_url
   end
 
