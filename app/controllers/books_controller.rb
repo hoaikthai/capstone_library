@@ -2,7 +2,8 @@ class BooksController < ApplicationController
 	before_action :valid_user, only: [:new, :edit]
 
 	def index
-		@books = Book.paginate(page: params[:page])
+		@books = Book.search(params[:search]).paginate(page: params[:page], per_page: 10)
+    flash.now[:info] = "No books found" if @books.empty?
 	end
 
 	def show

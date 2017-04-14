@@ -10,8 +10,16 @@ class Book < ApplicationRecord
 	validates :dewey_code, presence: true, numericality: { less_than: 1000 }
 	has_many :borrowings, dependent: :destroy
 
-	def self.search(search)
-		Book.where(search)
+	def self.search(params)
+		if params
+			@books = Book.where("name like ?", "%#{params}%")
+		else
+			Book.all
+		end
+	end
+
+	def self.advanced_search(search)
+		@books = Book.where(search)
 	end
 
 end

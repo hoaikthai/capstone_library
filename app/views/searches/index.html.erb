@@ -1,0 +1,15 @@
+<% provide(:title, 'Search Result') %>
+<%= will_paginate %><br>
+<table class="books-table" id="books-table">
+	<tr id="table-header">
+		<th class="col-name">Title</th>
+		<th class="col-name">Author</th>
+		<th class="col-name">Genres</th>
+		<th class="col-name">Publisher</th>
+		<th class="col-name">Publication Date</th>
+		<th class="col-name">Num. of pages</th>
+		<th class="col-name">Availability</th>
+	</tr>
+	<%= render @searches %>
+</table>
+<%= will_paginate %>

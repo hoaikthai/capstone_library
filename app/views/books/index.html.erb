@@ -1,5 +1,10 @@
-<% provide(:title, 'Capstone Library') %>
-<%= will_paginate %>
+<% provide(:title, 'All books') %>
+<%= will_paginate @books, remote: true %><br>
+<%= form_tag("/books", method: "get", remote: true, class: "books-search") do %>
+	<%= text_field_tag :search, params[:search], placeholder: "Search...", id: "search-bar" %>
+	<%= submit_tag "Search", id: "search-button", class: "btn btn-info" %>
+<% end %>
+<a href="/advanced_search">Advanced Search</a><br>
 <table class="books-table" id="books-table">
 	<tr id="table-header">
 		<th class="col-name">Title</th>
@@ -10,6 +15,8 @@
 		<th class="col-name">Num. of pages</th>
 		<th class="col-name">Availability</th>
 	</tr>
-	<%= render @books %>
+	<tbody class="books">
+		<%= render @books %>
+	</tbody>
 </table>
-<%= will_paginate %>
+<%= will_paginate @books, remote: true %>

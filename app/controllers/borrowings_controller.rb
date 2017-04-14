@@ -47,21 +47,35 @@ class BorrowingsController < ApplicationController
 		@book = Book.find_by(id: borrowing.book_id)
 		@user = User.find_by(id: borrowing.user_id)
 		if !borrowing.verified?
-			@user.increment!(:number_of_borrowed_books)
-			@book.decrement!(:availability)
-			borrowing.update_attributes(borrowed_time: Time.now,
-																	due_date: Time.now + @book.number_of_borrowing_days.days,
-																	verified: true,
-																	request: nil)
-			content = "Your borrowing " + @book.name + " request has been approved,
-													please come to Capstone Library to get your books."
-			Notification.create(user_id: @user.id, content: content)
+			if @user.number_of_borrowed_books < 5
+				@user.increment!(:number_of_borrowed_books)
+				@book.decrement!(:availability)
+				borrowing.update_attributes(borrowed_time: Time.now,
+																		due_date: Time.now + @book.number_of_borrowing_days.days,
+																		verified: true,
+																		request: nil)
+				content = "Your borrowing " + @book.name + " request has been approved,
+														please come to Capstone Library to get your books."
+				Notification.create(user_id: @user.id, content: content)
+			else
+				flash[:danger] = "This user has borrowed 5 books, hence this request is denied"
+				content = "Your borrowing " + @book.name + " request has been denied."
+				Notification.create(user_id: @user.id, content: content)
+				borrowing.delete
+			end
 		else
-			borrowing.update_attributes(number_of_extension: borrowing.number_of_extension + 1,
+			if @borrowing.number_of_extension < 3
+				borrowing.update_attributes(number_of_extension: borrowing.number_of_extension + 1,
 																	due_date: borrowing.due_date + borrowing.request.to_i.days,
 																	request: nil)
-			content = "Your extending " + @book.name + " request has been approved."
-			Notification.create(user_id: @user.id, content: content)
+				content = "Your extending " + @book.name + " request has been approved."
+				Notification.create(user_id: @user.id, content: content)
+			else
+				flash[:danger] = "This user has extended 3 times, hence this request is denied"
+				content = "Your extending borrowing " + @book.name + " request has been denied."
+				Notification.create(user_id: @user.id, content: content)
+				borrowing.update_attributes(request: nil)
+			end
 		end
 		redirect_to '/'
 	end
@@ -75,7 +89,7 @@ class BorrowingsController < ApplicationController
 			Notification.create(user_id: @user.id, content: content)
 			borrowing.delete
 		else
-			content = "Your borrowing " + @book.name + " request has been denied."
+			content = "Your extending borrowing " + @book.name + " request has been denied."
 			Notification.create(user_id: @user.id, content: content)
 			borrowing.update_attributes(request: nil)
 		end

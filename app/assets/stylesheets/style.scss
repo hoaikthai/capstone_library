@@ -30,6 +30,7 @@ textarea {
 }
 
 td, th {
+  word-wrap: break-word;
   font-weight: lighter;
   text-align: left;
   padding: 8px;
@@ -78,24 +79,6 @@ p {
 #logo:hover {
   color: #fff;
   text-decoration: none;
-}
-
-
-#search-bar {
-  width: 130px;
-  border: 2px solid #ccc;
-  font-size: 13px;
-  margin: 10px 20px 10px 0px;
-  padding: 6px 10px 6px 10px;
-  -webkit-transition: width 0.4s ease-in-out;
-  transition: width 0.4s ease-in-out;
-  &:focus {
-    width: 300px;
-  }
-}
-
-.glyphicon.glyphicon-search {
-  font-size: 20px;
 }
 
 /* forms */
