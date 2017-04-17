@@ -4,6 +4,10 @@ class BooksController < ApplicationController
 	def index
 		@books = Book.search(params[:search]).paginate(page: params[:page], per_page: 10)
     flash.now[:info] = "No books found" if @books.empty?
+    respond_to do |format|
+      format.html
+      format.js
+    end
 	end
 
 	def show

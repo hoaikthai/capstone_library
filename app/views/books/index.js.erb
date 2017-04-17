@@ -1,2 +1,3 @@
 $('.books').html('<%= escape_javascript(render @books) %>');
 $("div.pagination").html('<%= escape_javascript(will_paginate @books) %>');
+$('.pagination a').attr('data-remote', 'true');
