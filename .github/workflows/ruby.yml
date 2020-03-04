@@ -12,8 +12,7 @@ jobs:
         image: postgres:11
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: capstone_lib_test
+          POSTGRES_PASSWORD: password
         ports: ['5432:5432']
         options: >-
           --health-cmd pg_isready
@@ -40,9 +39,6 @@ jobs:
       env:
         PGHOST: 127.0.0.1
         RAILS_ENV: test
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: postgres
-        POSTGRES_DB: capstone_lib_test
       run: |
         bundle exec rails test
     - name: Slack Success Notification
