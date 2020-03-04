@@ -37,3 +37,15 @@ jobs:
         bundle install --jobs 4 --retry 3
         bundle exec rails db:setup
         bundle exec rails test
+    - name: Slack Success Notification
+      uses: rtCamp/action-slack-notify@v2.0.0
+      if: success()
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_USERNAME: Github Actions
+    - name: Slack Failure Notification
+      uses: rtCamp/action-slack-notify@v2.0.0
+      if: failure()
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_USERNAME: Github Actions
