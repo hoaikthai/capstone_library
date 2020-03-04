@@ -64,7 +64,7 @@ class BorrowingsController < ApplicationController
 				borrowing.delete
 			end
 		else
-			if borrowing.number_of_extension < 3
+			if @borrowing.number_of_extension < 3
 				borrowing.update_attributes(number_of_extension: borrowing.number_of_extension + 1,
 																	due_date: borrowing.due_date + borrowing.request.to_i.days,
 																	request: nil)
