@@ -31,6 +31,9 @@ jobs:
       env:
         PGHOST: 127.0.0.1
         RAILS_ENV: test
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_DB: capstone_lib_test
       run: |
         sudo apt-get -yqq install libpq-dev
         gem install bundler
