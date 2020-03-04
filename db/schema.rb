@@ -10,71 +10,77 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170408031718) do
+ActiveRecord::Schema.define(version: 2017_04_08_031718) do
 
-  create_table "books", force: :cascade do |t|
-    t.string   "name"
-    t.string   "author"
-    t.string   "genre"
-    t.integer  "pages"
-    t.string   "publisher"
-    t.date     "publication_date"
-    t.integer  "availability"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.text     "description"
-    t.integer  "number_of_borrowing_days"
-    t.integer  "dewey_code"
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "books", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.string "author"
+    t.string "genre"
+    t.integer "pages"
+    t.string "publisher"
+    t.date "publication_date"
+    t.integer "availability"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "description"
+    t.integer "number_of_borrowing_days"
+    t.integer "dewey_code"
   end
 
-  create_table "borrowings", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "book_id"
+  create_table "borrowings", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "book_id"
     t.datetime "borrowed_time"
     t.datetime "due_date"
-    t.boolean  "verified",            default: false
-    t.integer  "number_of_extension", default: 0
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.string   "request",             default: "borrow"
+    t.boolean "verified", default: false
+    t.integer "number_of_extension", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "request", default: "borrow"
     t.index ["book_id"], name: "index_borrowings_on_book_id"
     t.index ["user_id", "book_id"], name: "index_borrowings_on_user_id_and_book_id", unique: true
     t.index ["user_id"], name: "index_borrowings_on_user_id"
   end
 
-  create_table "deweys", force: :cascade do |t|
-    t.string   "code"
-    t.string   "genre"
+  create_table "deweys", id: :serial, force: :cascade do |t|
+    t.string "code"
+    t.string "genre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "notifications", force: :cascade do |t|
-    t.integer  "user_id"
-    t.text     "content"
-    t.boolean  "seen",       default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+  create_table "notifications", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.text "content"
+    t.boolean "seen", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "role"
-    t.string   "email"
-    t.date     "birthday"
-    t.string   "address"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
-    t.string   "password_digest"
-    t.string   "remember_digest"
-    t.string   "activation_digest"
-    t.boolean  "activated",                default: false
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.string "role"
+    t.string "email"
+    t.date "birthday"
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.string "remember_digest"
+    t.string "activation_digest"
+    t.boolean "activated", default: false
     t.datetime "activated_at"
-    t.string   "reset_digest"
+    t.string "reset_digest"
     t.datetime "reset_sent_at"
-    t.integer  "number_of_borrowed_books", default: 0
+    t.integer "number_of_borrowed_books", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "borrowings", "books"
+  add_foreign_key "borrowings", "users"
+  add_foreign_key "notifications", "users"
 end

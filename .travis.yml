@@ -1,0 +1,17 @@
+language: ruby
+cache: bundler
+rvm: 2.6.5
+services: postgresql
+
+env:
+  global:
+    - RAILS_ENV=test
+
+jobs:
+  include:
+    - stage: "Tests"
+    - name: "All tests"
+    - script: bundle exec rails t
+
+before_script:
+  psql -c 'create database capstone_lib_test' -U postgres;
