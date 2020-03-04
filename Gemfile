@@ -35,7 +35,7 @@ gem 'faker'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'bootstrap-sass', '3.4.1'
 gem 'will_paginate', '3.1.0'
-
+gem 'pg',   '0.18.4'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -44,7 +44,6 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry'
   gem 'pry-byebug'
-  gem 'sqlite3', '1.3.13'
 end
 
 group :test do
@@ -61,10 +60,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-end
-
-group :production do
-  gem 'pg',   '0.18.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
