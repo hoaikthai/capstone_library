@@ -11,4 +11,4 @@ jobs:
   include:
     - stage: "Tests"
     - name: "All tests"
-    - script: rails t
+    - script: bundle exec rails t
