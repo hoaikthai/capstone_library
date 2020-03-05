@@ -62,4 +62,3 @@ Borrowing.create!(user_id: 3,
                   verified: true,
                   number_of_extension: 2,
                   request: nil)
-
