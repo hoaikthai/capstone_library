@@ -31,7 +31,7 @@ jobs:
       env:
         cache-name: cache-gems
       with:
-        path: ~/.gems # npm cache files are stored in `~/.npm` on Linux/macOS
+        path: vendor/bundle # npm cache files are stored in `~/.npm` on Linux/macOS
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
