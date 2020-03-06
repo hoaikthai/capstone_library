@@ -51,16 +51,3 @@ jobs:
         bundle exec rails db:create
         bundle exec rails db:migrate
         bundle exec rails test
-    - name: Slack Success Notification
-      uses: rtCamp/action-slack-notify@v2.0.0
-      if: success()
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_USERNAME: Slack Success Notification
-    - name: Slack Failure Notification
-      uses: rtCamp/action-slack-notify@v2.0.0
-      if: failure()
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_USERNAME: Slack Failure Notification
-        SLACK_COLOR: FF0000
