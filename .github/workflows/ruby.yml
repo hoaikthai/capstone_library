@@ -29,6 +29,7 @@ jobs:
     - name: Install required apt packages
       run: |
         sudo apt-get -y install libpq-dev
+        gem install bundler
     - name: Cache gems
       uses: actions/cache@v1
       env:
