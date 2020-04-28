@@ -30,8 +30,6 @@ jobs:
       run: |
         sudo apt-get -y install libpq-dev
         gem install bundler
-        gem install rubocop
-        gem install rubocop-performance
     - name: Cache gems
       uses: actions/cache@v1
       env:
@@ -49,7 +47,7 @@ jobs:
         bundle install --jobs 4 --retry 3
     - name: Run Rubocop
       run: |
-        rubocop
+        bundle exec rubocop
     - name: Test with rake
       env:
         PGHOST: 127.0.0.1
