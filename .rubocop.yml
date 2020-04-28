@@ -1,0 +1,73 @@
+require: rubocop-performance
+
+AllCops:
+  DisplayCopNames: true
+  Exclude:
+    - '**/*.yml'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'doc/**/*'
+    - 'bin/**/*'
+    - 'test/**/*'
+    - 'Guardfile'
+    - 'Rakefile'
+    - 'public/**/*'
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 200
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Layout/ParameterAlignment:
+  Enabled: false
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Metrics/BlockLength:
+  Exclude:
+    - 'lib/**/*_job.rb'
+    - 'spec/**/*'
+
+Metrics/ClassLength:
+  Enabled: false
+
+Style/BlockComments:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*'
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/RedundantSelf:
+  Enabled: false
