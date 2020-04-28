@@ -45,6 +45,9 @@ jobs:
       run: |
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
+    - name: Run Rubocop
+      run: |
+        bin/rubocop
     - name: Test with rake
       env:
         PGHOST: 127.0.0.1
